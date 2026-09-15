@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doda Artisanal Cave Hotel — 7/24 AI Misafir Asistanı</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-badge">DEMO</div>
+                <div class="brand-icon">🏛️</div>
+                <div class="brand-text">
+                    <h2>DODA Cave Suites</h2>
+                    <p>Kapadokya / Göreme</p>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <p class="nav-label">GÖRÜNÜM MODU</p>
+                <button class="nav-btn active" id="tabChatBtn" onclick="switchTab('chat')">
+                    <span class="btn-icon">💬</span>
+                    <span>Canlı AI Asistan</span>
+                </button>
+                <button class="nav-btn" id="tabAdminBtn" onclick="switchTab('admin')">
+                    <span class="btn-icon">📊</span>
+                    <span>Rezervasyon Paneli (CRM)</span>
+                    <span class="badge-count" id="reservationBadge">2</span>
+                </button>
+            </div>
+
+            <div class="hotel-info-card">
+                <div class="info-header">
+                    <span class="pulse-dot"></span>
+                    <strong>Sistem Durumu: 7/24 Aktif</strong>
+                </div>
+                <p class="info-desc">Çok Dilli Doğal Dil Modeli devrede. Misafir sorularını anında yanıtlar ve rezervasyon toplar.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-val">0.3 sn</span>
+                        <span class="stat-lbl">Yanıt Süresi</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">5 Dil</span>
+                        <span class="stat-lbl">Aktif Dil</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>Hazırlayan: <strong>Abdullah</strong></p>
+                <span class="tag">AI Otomasyon Asistanı</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- CHAT VIEW -->
+            <div id="chatView" class="view-panel active">
+                <div class="chat-header">
+                    <div class="hotel-profile">
+                        <div class="avatar-box">
+                            <span class="avatar-emoji">🛎️</span>
+                            <span class="online-indicator"></span>
+                        </div>
+                        <div>
+                            <div class="hotel-name-row">
+                                <h3>Doda Cave Concierge AI</h3>
+                                <span class="verified-badge">✓ Resmi Otel Asistanı</span>
+                            </div>
+                            <p class="hotel-sub">Türkçe • English • Русский • العربية • Deutsch</p>
+                        </div>
+                    </div>
+
+                    <!-- Language Switcher -->
+                    <div class="lang-picker">
+                        <label for="langSelect">🌐 Dil:</label>
+                        <select id="langSelect" onchange="changeLanguage(this.value)">
+                            <option value="tr" selected>🇹🇷 Türkçe</option>
+                            <option value="en">🇬🇧 English</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="ar">🇸🇦 العربية</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Scroll Area -->
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Initial Welcome Message injected via JS -->
+                </div>
+
+                <!-- Quick Suggestion Pills -->
+                <div class="quick-prompts" id="quickPrompts">
+                    <button class="pill" onclick="sendQuickMessage('Oda fiyatları ve müsaitlik nedir?')">🛏️ Oda Fiyatları</button>
+                    <button class="pill" onclick="sendQuickMessage('Kapadokya Balon Turu rezervasyonu yapıyor musunuz?')">🎈 Balon Turu</button>
+                    <button class="pill" onclick="sendQuickMessage('Havalimanı transferiniz var mı?')">🚐 Havalimanı Transferi</button>
+                    <button class="pill" onclick="sendQuickMessage('Jakuzili Mağara Süiti hakkında bilgi alabilir miyim?')">✨ Jakuzili Süit</button>
+                    <button class="pill" onclick="sendQuickMessage('Oda rezervasyonu yapmak istiyorum')">📅 Rezervasyon Yap</button>
+                </div>
+
+                <!-- Chat Input Bar -->
+                <div class="chat-input-container">
+                    <form id="chatForm" onsubmit="handleUserSubmit(event)">
+                        <input type="text" id="userInput" placeholder="Otel, odalar veya rezervasyon hakkında bir soru yazın..." autocomplete="off" required>
+                        <button type="submit" id="sendBtn" class="send-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ADMIN / CRM VIEW -->
+            <div id="adminView" class="view-panel">
+                <div class="admin-header">
+                    <div>
+                        <h2>📊 Otel Resepsiyon & Rezervasyon Paneli</h2>
+                        <p>Yapay Zeka Asistanı tarafından toplanan canlı rezervasyon talepleri ve misafir bilgileri.</p>
+                    </div>
+                    <button class="export-btn" onclick="exportReservations()">📥 Excel / CSV İndir</button>
+                </div>
+
+                <div class="admin-stats-row">
+                    <div class="admin-card">
+                        <span class="card-icon">🛎️</span>
+                        <div class="card-text">
+                            <h4>Toplam Talep</h4>
+                            <p class="metric-num" id="totalLeadsCount">2</p>
+                        </div>
+                    </div>
+                    <div class="admin-card">
+                        <span class="card-icon">💰</span>
+                        <div class="card-text">
+                            <h4>Tahmini Rezervasyon Hacmi</h4>
+                            <p class="metric-num">€1,450</p>
+                        </div>
+                    </div>
+                    <div class="admin-card">
+                        <span class="card-icon">⚡</span>
+                        <div class="card-text">
+                            <h4>Ortalama AI Yanıtlama</h4>
+                            <p class="metric-num">0.2 sn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="leads-table">
+                        <thead>
+                            <tr>
+                                <th>MİSAFİR</th>
+                                <th>TELEFON / E-POSTA</th>
+                                <th>ODA TİPİ</th>
+                                <th>TARİH</th>
+                                <th>KİŞİ</th>
+                                <th>DİL</th>
+                                <th>DURUM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Booking Modal Form inside Chat -->
+    <div id="bookingModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>📅 Hızlı Rezervasyon Talebi</h3>
+                <button class="close-btn" onclick="closeBookingModal()">✕</button>
+            </div>
+            <form id="bookingForm" onsubmit="handleBookingFormSubmit(event)">
+                <div class="form-group">
+                    <label>Adınız Soyadınız *</label>
+                    <input type="text" id="guestName" required placeholder="Örn: John Smith / Ahmet Yılmaz">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefon / WhatsApp *</label>
+                        <input type="tel" id="guestPhone" required placeholder="+90 532 000 00 00">
+                    </div>
+                    <div class="form-group">
+                        <label>E-posta</label>
+                        <input type="email" id="guestEmail" placeholder="ornek@mail.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Giriş Tarihi *</label>
+                        <input type="date" id="checkInDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Çıkış Tarihi *</label>
+                        <input type="date" id="checkOutDate" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Oda Tipi</label>
+                        <select id="roomTypeSelect">
+                            <option value="Jakuzili Mağara Süit">✨ Jakuzili Mağara Süit (€180/gece)</option>
+                            <option value="Deluxe Cave Room">🏰 Deluxe Cave Room (€130/gece)</option>
+                            <option value="King Balcony Suite">👑 King Balcony Suite (€250/gece)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Misafir Sayısı</label>
+                        <select id="guestCount">
+                            <option value="1 Yetişkin">1 Yetişkin</option>
+                            <option value="2 Yetişkin" selected>2 Yetişkin</option>
+                            <option value="2 Yetişkin + 1 Çocuk">2 Yetişkin + 1 Çocuk</option>
+                            <option value="3+ Kişi">3+ Kişi</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="submit-booking-btn">Rezervasyon Talebini Gönder 🚀</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
